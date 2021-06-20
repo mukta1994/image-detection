@@ -3,7 +3,6 @@ import { readFileSync } from 'fs';
 export default class ConvertToMatrix {
 
    //read text file to get data from file and that is converted to array.
-    static fs: any = require('fs');
     constructor() {
     }
      processImage( filePath:string):string[]{

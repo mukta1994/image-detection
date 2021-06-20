@@ -4,9 +4,6 @@ export default class InputImage {
    
     constructor(img:string[]) {
          this.image = img
-         this.getSize()
-         this.validateImage()
-             
     }
 
     //gets size of input image(2dimensional array)
@@ -26,7 +23,7 @@ export default class InputImage {
                 return false
             for(let j = 0;j < size.cols; j++) {
                 if(this.image[i][j] != 'o' && this.image[i][j] != '-')
-                    return false
+                    throw new Error("image should contain only 'o' and '-' ")
             }
         }
         return true;

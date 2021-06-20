@@ -12,8 +12,8 @@ export default class SearchSpaceInvador {
     }
 
     areValidImages(radarImg: string[], spaceInv: string[]) {
-        if (radarImg.length <= spaceInv.length || radarImg[0].length <= spaceInv[0].length) {
-            throw Error()
+        if (radarImg.length <= spaceInv.length - 1 || radarImg[0].length <= spaceInv[0].length - 1) {
+            throw new Error("Radar image should be grater than invador")
         }
         else {
             return true
@@ -21,14 +21,15 @@ export default class SearchSpaceInvador {
     }
 
 
-    //returns no. of invadors found in radar image.
+    //returns no. of invadors found in the radar image.
     //invador is detected depending on the percentage of accuracy
+    //invadorsPosition - which stores starting point of matched image
+    //ignoreMismatches - by taking the accuracy of the image to be detected, ignoreMismatches is calcuted(for ex 100% accuracy means mismatches must be 0.)
     getNumOfInvadorsFound(radar: RadarImage, invador: InvadorImage) {
-        let radarImg = radar.radarImage
-        let spaceInv = invador.invadorImage
-        if (!this.areValidImages(radarImg, spaceInv))
-            throw Error();
-        else {
+        let radarImg = radar.valid ? radar.radarImage : []
+        let spaceInv = invador.valid ? invador.invadorImage : []
+
+        if (this.areValidImages(radarImg, spaceInv)) {
             let count = 0
             let invadorsPosition: any = {}
             let ignoreMismatches = this.mismatchesTobeIgnored(spaceInv)
