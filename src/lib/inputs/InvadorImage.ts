@@ -16,7 +16,7 @@ export default class InvadorImage {
 
     // compare subimage(sub matrix) with invador returns true if it matches else returns false.
     //While loop is used 
-    compareSubImg(subimage:string[], ignoreMismatches:number):any {
+    compareWithSubImg(subimage:string[], ignoreMismatches:number) {
         let count = 0
         let i = 0
 

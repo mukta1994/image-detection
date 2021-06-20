@@ -45,7 +45,7 @@ export default class SearchSpaceInvador {
                     let subimage = radar.createSubMatrix(i,j,invador.rows,invador.cols)
 
                     //compareSubImg which checks whether subimage (sub matrix) matches with invador
-                    if (invador.compareSubImg(subimage, ignoreMismatches)) {
+                    if (invador.compareWithSubImg(subimage, ignoreMismatches)) {
                         count++;
                         invadorsPosition[count] = { 'i': i, 'j': j }
                     }
