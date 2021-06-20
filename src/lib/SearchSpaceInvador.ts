@@ -21,10 +21,12 @@ export default class SearchSpaceInvador {
     }
 
 
-    //returns no. of invadors found in the radar image.
-    //invador is detected depending on the percentage of accuracy
-    //invadorsPosition - which stores starting point of matched image
-    //ignoreMismatches - by taking the accuracy of the image to be detected, ignoreMismatches is calcuted(for ex 100% accuracy means mismatches must be 0.)
+    /**
+     * returns no. of invadors found in the radar image.
+     * @param {string[]} invador is detected depending on the percentage of accuracy
+     * @param {object} invadorsPosition - which stores starting point of matched image
+     * @param {number} ignoreMismatches - by taking the accuracy of the image to be detected, ignoreMismatches is calcuted(for ex 100% accuracy means mismatches must be 0)
+     */
     getNumOfInvadorsFound(radar: RadarImage, invador: InvadorImage) {
         let radarImg = radar.valid ? radar.radarImage : []
         let spaceInv = invador.valid ? invador.invadorImage : []
@@ -37,10 +39,10 @@ export default class SearchSpaceInvador {
             let lengthOfCols = radar.cols - invador.rows + 1
 
             for (let i = 0; i < lengthOfRows; i++) {
+
                 for (let j = 0; j < lengthOfCols; j++) {
 
-                    //subimage gets sub matrix of radar image of invador size. 
-                    let subimage = radarImg.slice(i, i + invador.rows).map((i: any) => i.slice(j, j + invador.cols))
+                    let subimage = this.createSubMatrix(i,j,invador.rows,invador.cols,radarImg)
 
                     //compareSubImg which checks whether subimage (sub matrix) matches with invador
                     if (this.compareSubImg(subimage, spaceInv, ignoreMismatches)) {
@@ -54,8 +56,11 @@ export default class SearchSpaceInvador {
         }
     }
 
-
-    //No. of mimatches to be allowed is calculated by using percentage of accuracy
+    /**
+    * returns number of misatches to be allowed and is calculated by using percentage of accuracy
+    *  @param {number} comparisons - gets total number of comparisons to be made with subimage and invador  
+    *  @param {number} mismatchesIgnore - number of mismatches can be ignored when searching for invadors
+    */
     mismatchesTobeIgnored(spaceInv: string[]) {
         let comparisons = spaceInv[0].length * spaceInv.length
         let mismatchesIgnore: number = ((100 - this.accuracy) / 100) * comparisons;
@@ -85,6 +90,13 @@ export default class SearchSpaceInvador {
         return true
     }
 
+    //create submatrix
+    createSubMatrix(rowStart:number, colStart:number, rowEnd:number,colEnd:number, radarImg:string[]) {
+        return radarImg.slice(rowStart, rowStart + rowEnd).
+                        map((i: any) => i.slice(colStart, colStart + colEnd))
+
+    }
+
 
     //another logic using for loop to compare subimage(sub matrix) with invador returns true if it matches else returns false.
     compareSubImageUsingForLoop(subimage: string[], spaceInvador: string[], ignoreMismatches: number) {
@@ -101,4 +113,7 @@ export default class SearchSpaceInvador {
         return true
     }
 }
+
+ //subimage gets sub matrix of radar image of invador size. 
+ //let subimage = radarImg.slice(i, i + invador.rows).map((i: any) => i.slice(j, j + invador.cols))
 
