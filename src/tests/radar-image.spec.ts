@@ -7,11 +7,10 @@ const matrix1 = new ConvertToMatrix()
 const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
 
 
-describe('convert text file data to array', () => {
+describe('create sub matrix from radar', () => {
     const expected = [['-','-','o','o'],['-','o','o','-'],['o','o','o','o']];
     const radar = new RadarImage(new InputImage(invador1))
     it('test sub matrix created', () => {
       expect(radar.createSubMatrix(2,0,3,4)).toEqual(expect.arrayContaining(expected));
     });
-  
 })

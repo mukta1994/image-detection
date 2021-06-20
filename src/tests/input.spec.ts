@@ -3,7 +3,7 @@ import ConvertToMatrix from '../../src/lib/ConvertToMatrix'
 
 const matrix1 = new ConvertToMatrix()
 
-const exmpleRadarImage = matrix1.processImage('src/imagefiles/file.txt')
+const exmpleRadarImage = matrix1.processImage('src/imagefiles/radarimage.txt')
 const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
 const invalidImage = matrix1.processImage('src/imagefiles/invalidimage.txt')
 

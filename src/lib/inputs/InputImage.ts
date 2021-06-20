@@ -6,7 +6,7 @@ export default class InputImage {
          this.image = img
     }
 
-    //gets size of input image(2dimensional array)
+    //gets size of input image(2dimensional array number of rows and columns)
     getSize() {
         if(!this.image.length || !this.image[0].length) 
             throw  Error()
