@@ -1,17 +1,10 @@
 import InputImage from '../../src/lib/inputs/InputImage'
 import ConvertToMatrix from '../../src/lib/ConvertToMatrix'
 
-const exmpleRadarImage = ConvertToMatrix.processImage('src/imagefiles/file.txt')
-const emptyFile = ConvertToMatrix.processImage('src/imagefiles/empty.txt')
-const invador1 = ConvertToMatrix.processImage('src/imagefiles/invador1.txt')
+const matrix1 = new ConvertToMatrix()
 
-
- it('when empty txt file is passed it should throw error', () => {  
-    const radarImg = new InputImage(emptyFile)
-    jest.spyOn(radarImg, 'getSize')
-    expect(() => radarImg.getSize()).toThrow()
-    expect(radarImg.getSize).toHaveBeenCalledTimes(1)
-  });
+const exmpleRadarImage = matrix1.processImage('src/imagefiles/file.txt')
+const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
 
 
   it('should return number of rows and cols of input image', () => {  

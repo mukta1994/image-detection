@@ -4,6 +4,9 @@ export default class InputImage {
    
     constructor(img:string[]) {
          this.image = img
+         this.getSize()
+         this.validateImage()
+             
     }
 
     //gets size of input image(2dimensional array)
