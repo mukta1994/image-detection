@@ -14,4 +14,9 @@ export default class RadarImage {
         this.valid = radar.validateImage()
     }
 
+    createSubMatrix(rowStart:number,colStart:number, rowEnd:number,colEnd:number):string[]{
+        return this.radarImage.slice(rowStart, rowStart + rowEnd).
+                               map((i: any) => i.slice(colStart, colStart + colEnd))
+    }
+
 }
