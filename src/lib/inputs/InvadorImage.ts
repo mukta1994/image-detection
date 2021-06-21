@@ -50,20 +50,21 @@ export default class InvadorImage {
      */
     compareWithSubImg(subimage: string[], ignoreMismatches: number): any {
         let count: any = 0
-        let totalRows = this.rows-1
-        let totalCols = this.cols-1
+        let totalRows = this.rows - 1
+        let totalCols = this.cols - 1
         let midRow = Math.floor(subimage.length / 2)
         let midCol = Math.floor(subimage[0].length / 2)
         let mismatchCount = Math.floor(ignoreMismatches)
 
         for (let i = 0; i < midRow; i++) {  //O(n/2)
-            let args = {'i':i,'subimage':subimage,
-                        'count':count,
-                        'midCol': midCol,
-                        'ignoreMismatches':mismatchCount,
-                        'rows':totalRows,
-                        'cols':totalCols
-                    }
+            let args = {
+                'i': i, 'subimage': subimage,
+                'count': count,
+                'midCol': midCol,
+                'ignoreMismatches': mismatchCount,
+                'rows': totalRows,
+                'cols': totalCols
+            }
             count = this.compareElements(args)
 
             if (this.isValidMatch(count, mismatchCount))
@@ -72,13 +73,14 @@ export default class InvadorImage {
 
         //this compares middle row elements when radar array has odd row length 
         if (subimage.length % 2 != 0) {
-            let args = {'i':midRow,'subimage':subimage,
-                        'count':count,
-                        'midCol': midCol,
-                        'ignoreMismatches':mismatchCount,
-                        'rows':totalCols,
-                        'cols':totalCols
-                        }
+            let args = {
+                'i': midRow, 'subimage': subimage,
+                'count': count,
+                'midCol': midCol,
+                'ignoreMismatches': mismatchCount,
+                'rows': totalCols,
+                'cols': totalCols
+            }
             count = this.compareElements(args)
 
             if (this.isValidMatch(count, mismatchCount))
@@ -88,8 +90,8 @@ export default class InvadorImage {
     }
 
     //For each loop, column is validated from both sides where it can reduce half of loops
-    compareElements(args:any) {
-        const {i,subimage,midCol,ignoreMismatches,rows,cols} = args
+    compareElements(args: any) {
+        const { i, subimage, midCol, ignoreMismatches, rows, cols } = args
 
         for (let j = 0; j < midCol; j++) { //O(n/2) 4 loops is reduced to 1 loop
 
