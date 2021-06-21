@@ -50,84 +50,80 @@ export default class InvadorImage {
      */
     compareWithSubImg(subimage: string[], ignoreMismatches: number): any {
         let count: any = 0
-        let totalRows = this.rows - 1
-        let totalCols = this.cols - 1
         let midRow = Math.floor(subimage.length / 2)
         let midCol = Math.floor(subimage[0].length / 2)
-        let mismatchCount = Math.floor(ignoreMismatches)
+        let args = {
+            'i': 0,
+            'midCol': midCol,
+            'ignoreMismatches': Math.floor(ignoreMismatches),
+            'rows': this.rows - 1,
+            'cols': this.cols - 1,
+            'subimage': subimage
+        }
 
         for (let i = 0; i < midRow; i++) {  //O(n/2)
-            let args = {
-                'i': i, 'subimage': subimage,
-                'count': count,
-                'midCol': midCol,
-                'ignoreMismatches': mismatchCount,
-                'rows': totalRows,
-                'cols': totalCols
-            }
-            count = this.compareElements(args)
+           
+            args.i = i
 
-            if (this.isValidMatch(count, mismatchCount))
+            count = this.compareElements(args, count)
+
+            if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
         }
 
         //this compares middle row elements when radar array has odd row length 
         if (subimage.length % 2 != 0) {
-            let args = {
-                'i': midRow, 'subimage': subimage,
-                'count': count,
-                'midCol': midCol,
-                'ignoreMismatches': mismatchCount,
-                'rows': totalCols,
-                'cols': totalCols
-            }
-            count = this.compareElements(args)
 
-            if (this.isValidMatch(count, mismatchCount))
+            args.i = midRow
+
+            count = this.compareElements(args, count)
+
+            if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
         }
         return true
     }
 
     //For each loop, column is validated from both sides where it can reduce half of loops
-    compareElements(args: any) {
+    compareElements(args: any, count: number) {
+        
         const { i, subimage, midCol, ignoreMismatches, rows, cols } = args
 
         for (let j = 0; j < midCol; j++) { //O(n/2) 4 loops is reduced to 1 loop
 
             //compare element from top row and left column
             if (subimage[i][j] != this.invadorImage[i][j]) {
-                if (this.isValidMatch(args.count, ignoreMismatches)) break;
-                else args.count++
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
             }
 
             //compare element from top row and right column
             if (subimage[i][cols - j] != this.invadorImage[i][cols - j]) {
-                if (this.isValidMatch(args.count, ignoreMismatches)) break;
-                else args.count++
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
             }
 
             //compare element from bottom row and left column
             if (subimage[rows - i][j] != this.invadorImage[rows - i][j]) {
-                if (this.isValidMatch(args.count, ignoreMismatches)) break;
-                else args.count++
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
             }
 
             //compare element of bottom row and right column
             if (subimage[rows - i][cols - j] != this.invadorImage[rows - i][cols - j]) {
-                if (this.isValidMatch(args.count, ignoreMismatches)) break;
-                else args.count++
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
             }
 
             //this logic compares middle element of i'th row when invador array has odd column length 
             if (subimage[0].length % 2 != 0 && j == midCol - 1) {
                 if (subimage[i][j + 1] != this.invadorImage[i][j + 1]) {
-                    if (this.isValidMatch(args.count, ignoreMismatches)) break;
-                    else args.count++
+                    if (this.isValidMatch(count, ignoreMismatches)) break;
+                    else count++
                 }
             }
         }
-        return args.count
+        return count
     }
 
     isValidMatch(count: number, mismatches: number) {
