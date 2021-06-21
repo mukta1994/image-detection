@@ -7,6 +7,7 @@ const exmpleRadarImage = matrix1.processImage('src/imagefiles/radarimage.txt')
 const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
 const invalidImage = matrix1.processImage('src/imagefiles/invalidimage.txt')
 
+describe('test images to get size and validation', () => {
 
   it('test to return number of rows and cols of input image', () => {  
     const radarImg = new InputImage(exmpleRadarImage)
@@ -33,3 +34,4 @@ const invalidImage = matrix1.processImage('src/imagefiles/invalidimage.txt')
     expect(t).toThrow();
     expect(radarImg.validateImage).toHaveBeenCalledTimes(1)
   });
+});

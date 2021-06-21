@@ -1,0 +1,87 @@
+
+Example
+
+//Consider we have 5*5  2 matrix(submatrix and invador(matrix to be compared)). It is traversed as shown below while comparison
+
+    row wise                  column wise
+    ---------------
+   |---->     <----|           - - - - -     
+   |               |           ^       ^      
+   |               |
+   |               |
+   |---->     <----|           - - - - -
+    ---------------            ^       ^
+
+    ---------------
+   |               |                
+   |---->     <----|           - - - - -           
+   |               |             ^   ^
+   |---->     <----|           - - - - - 
+   |               |             ^   ^      
+    ---------------
+
+    ---------------
+   |               |       
+   |               |       
+   |---->     <----|           - - - - -       
+   |               |               ^     
+   |               |       
+    ---------------
+
+
+
+
+Algorighm for searching invador in Radar image
+
+ 1. Get length of rows and columns to be considered.
+        lengthOfrows = radarImageRows - invadorImgRows+1 
+        lengthOfcols = radarImageCols - invadorImgCols+1 
+
+        //depending on how much accuracy for invador detection is needed
+        mismatchesToBeignored = 80% of accuracy means 20% of mismatches are allowed
+
+        initialize invadorcount = 0
+
+2. FOR rows = 0 to lengthOfrows //O(n)
+3.     FOR rows = 0 to lengthOfcols  //O(n)
+4.               submatrix = get submatrix of radar image of size invador. i'th row to i+invadorImgRows and j'th column to j+invadorImgCols
+5.               initialize count = 0 
+
+               //compare submatrix with invador follow below steps return true if matches
+6.                FOR i =  0 to invadorRowlength/2   //O(n/2)
+7.                    FOR j = 0 to invadorColLength/2  //O(n/2)
+                        //compare elements at i and j position
+                        //compare element from top row and left column
+8.                        if(submatrix[i][j] != invador[i][j])
+9.                           if count > mismatchesToBeignored then break; else count++ 
+
+                        //compare element from top row and right column
+10.                       if(submatrix[i][invadorColLength-1-j] != invador[i][invadorColLength-1-j])
+                            repeat step 9
+                        
+                        //compare element from bottom row and left column
+11.                        if(submatrix[invadorRowlength-1-i][j] != invador[invadorRowlength-1-i][j])
+                                repeat step 9
+
+                        //compare element of bottom row and right column
+12.                        if(submatrix[invadorRowlength-1-i][invadorColLength-1-j] != invador[invadorRowlength-1-i][invadorColLength-1-j])
+                              repeat step 9 
+
+                        //this logic compares middle element of i'th row when invador array has odd column length 
+13.                        if(invadorRowlength%2!=0 && j == invadorColLength/2 - 1)
+                            if(submatrix[i][j] != invador[i][j])
+                                repeat step 9
+
+                    ENDFOR
+                    if(count > mismatchesToBeignored) then return false
+                ENDFOR
+                //this logic compares middle row elements of submatrix with invador 
+                 if(radarImageRows%2!=0 )
+                        repeat step 7
+                return true
+                if(true) then invadorcount++
+            ENDFOR
+        ENDFOR
+        return invadorcount;
+
+

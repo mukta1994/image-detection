@@ -46,12 +46,14 @@ describe('match invadors with different accuracy', () => {
     expect(searchInvador.getNumOfInvadorsFound).toHaveBeenCalledTimes(1)
   });
 
+
   it('number of invador matches with 90% accuracy', () => {
     const searchInvador = new SearchSpaceInvador(90)
     jest.spyOn(searchInvador, 'getNumOfInvadorsFound')
     expect(searchInvador.getNumOfInvadorsFound(radarImg, invadorImg)).toEqual(1)
     expect(searchInvador.getNumOfInvadorsFound).toHaveBeenCalledTimes(1)
   });
+
 
   it('number of invador matches with 100% accuracy', () => {
     const searchInvador = new SearchSpaceInvador(100)
@@ -66,6 +68,7 @@ describe('match invadors with different accuracy', () => {
     expect(searchInvador.getNumOfInvadorsFound(radarImg2, invadorImg2)).toEqual(3)
     expect(searchInvador.getNumOfInvadorsFound).toHaveBeenCalledTimes(1)
   });
+
 });
 
 
@@ -92,6 +95,7 @@ describe.skip('test with small radars', () => {
     expect(searchInvador.getNumOfInvadorsFound(radarImgSmall, invadorImgSmall)).toEqual(2)
     expect(searchInvador.getNumOfInvadorsFound).toHaveBeenCalledTimes(1)
   });
+
 
 })
 

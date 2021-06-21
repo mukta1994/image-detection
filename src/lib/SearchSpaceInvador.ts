@@ -4,6 +4,8 @@ import InvadorImage from '../lib/inputs/InvadorImage'
 export default class SearchSpaceInvador {
 
     accuracy: number
+    eff: number = 0
+    brute: number = 0
 
     constructor(accuracyPerc: number) {
         this.accuracy = accuracyPerc
@@ -22,6 +24,7 @@ export default class SearchSpaceInvador {
             return true
         }
     }
+
 
     /**
      * returns no. of invadors found in the radar image.
@@ -43,18 +46,20 @@ export default class SearchSpaceInvador {
             let lengthOfRows = radar.rows - invador.rows + 1
             let lengthOfCols = radar.cols - invador.rows + 1
 
-            for (let i = 0; i < lengthOfRows; i++) {
-                for (let j = 0; j < lengthOfCols; j++) {
-                    let subimage = radar.createSubMatrix(i,j,invador.rows,invador.cols)
+            for (let i = 0; i < lengthOfRows; i++) { //O(n)
+                for (let j = 0; j < lengthOfCols; j++) {  //O(n)
 
-                    //compareSubImg which checks whether subimage (sub matrix) matches with invador
+                    let subimage = radar.createSubMatrix(i, j, invador.rows, invador.cols)
+
+                    //compareSubImg which checks whether subimage (sub matrix) matches with invador.
+                    //Pictorial representation of how sub matrix and sub image is compared is shown in InvadorImage class
                     if (invador.compareWithSubImg(subimage, ignoreMismatches)) {
                         count++;
                         invadorsPosition[count] = { 'i': i, 'j': j }
                     }
                 }
             }
-            console.log(invadorsPosition)
+            console.log( "Position of invadors:", invadorsPosition)
             return count;
         }
     }
@@ -72,6 +77,7 @@ export default class SearchSpaceInvador {
 
         return mismatchesIgnore;
     }
+
 
 }
 
