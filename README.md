@@ -7,6 +7,8 @@ npm install
 
 npm run test
 
+`npm run test` will run all tests.
+
 
 
 #src folder structure
