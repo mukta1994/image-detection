@@ -10,6 +10,7 @@ describe('create sub matrix from radar', () => {
     const expected = [['-','-','o','o'],['-','o','o','-'],['o','o','o','o']];
     const radar = new RadarImage(new InputImage(invador1))
     it('test sub matrix created', () => {
-      expect(radar.createSubMatrix(2,0,3,4)).toEqual(expect.arrayContaining(expected));
+      let data = { 'rowStart': 2, 'colStart': 0, 'rowEnd': 3, 'colEnd': 4}
+      expect(radar.createSubMatrix(data)).toEqual(expect.arrayContaining(expected));
     });
 })

@@ -49,7 +49,7 @@ export default class SearchSpaceInvador {
             for (let i = 0; i < lengthOfRows; i++) { //O(n)
                 for (let j = 0; j < lengthOfCols; j++) {  //O(n)
 
-                    let subimage = radar.createSubMatrix(i, j, invador.rows, invador.cols)
+                    let subimage = radar.createSubMatrix({ 'rowStart': i, 'colStart': j, 'rowEnd': invador.rows, 'colEnd': invador.cols})
 
                     //compareSubImg which checks whether subimage (sub matrix) matches with invador.
                     //Pictorial representation of how sub matrix and sub image is compared is shown in InvadorImage class
@@ -59,7 +59,7 @@ export default class SearchSpaceInvador {
                     }
                 }
             }
-            console.log( "Position of invadors:", invadorsPosition)
+            console.log("Position of invadors:", invadorsPosition)
             return count;
         }
     }

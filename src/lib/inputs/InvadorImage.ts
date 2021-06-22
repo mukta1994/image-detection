@@ -1,5 +1,6 @@
 import InputImage from './InputImage'
 
+
 export default class InvadorImage {
 
     invadorImage: string[][]
@@ -48,11 +49,11 @@ export default class InvadorImage {
      * @param ignoreMismatches - number of mismatches allowed. This is compared with count.
      * Pictoria representation is shown above.
      */
-    compareWithSubImg(subimage: string[][], ignoreMismatches: number): any {
+    compareWithSubImg(subimage: string[][], ignoreMismatches: number): boolean {
         let count: any = 0
         let midRow = Math.floor(subimage.length / 2)
         let midCol = Math.floor(subimage[0].length / 2)
-        let args = {
+        let args:info = {
             'i': 0,
             'midCol': midCol,
             'ignoreMismatches': Math.floor(ignoreMismatches),
@@ -85,7 +86,7 @@ export default class InvadorImage {
     }
 
     //For each loop, column is validated from both sides where it can reduce half of loops
-    compareElements(args: any, count: number) {
+    compareElements(args: info, count: number) {
         
         const { i, subimage, midCol, ignoreMismatches, rows, cols } = args
 
@@ -138,7 +139,7 @@ export default class InvadorImage {
      * @argument {number} ignoreMismatches - number of mismatches allowed. This is compared with count.
      * @argument {string[]} subimage - submatrix of radar image which is to be compared with invador image
      */
-    compareWithSubImg1(subimage: string[], ignoreMismatches: number): any {
+    compareWithSubImg1(subimage: string[], ignoreMismatches: number): boolean {
         let count = 0
         for (let i = 0; i < subimage.length; i++) {
             for (let j = 0; j < subimage[0].length; j++) {
