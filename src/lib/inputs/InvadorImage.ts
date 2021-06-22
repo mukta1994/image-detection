@@ -2,7 +2,7 @@ import InputImage from './InputImage'
 
 export default class InvadorImage {
 
-    invadorImage: string[]
+    invadorImage: string[][]
     rows: number
     cols: number
     valid: boolean
@@ -48,7 +48,7 @@ export default class InvadorImage {
      * @param ignoreMismatches - number of mismatches allowed. This is compared with count.
      * Pictoria representation is shown above.
      */
-    compareWithSubImg(subimage: string[], ignoreMismatches: number): any {
+    compareWithSubImg(subimage: string[][], ignoreMismatches: number): any {
         let count: any = 0
         let midRow = Math.floor(subimage.length / 2)
         let midCol = Math.floor(subimage[0].length / 2)

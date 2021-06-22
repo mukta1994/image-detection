@@ -2,7 +2,7 @@ import InputImage from './InputImage'
 
 export default class RadarImage {
 
-    radarImage : string[]
+    radarImage : string[][]
     rows : number
     cols : number
     valid: boolean
@@ -21,7 +21,7 @@ export default class RadarImage {
      * @param rowEnd - index of row of radar image(the end position of slice horizontally)
      * @param colEnd - index of column of radar image(the end position of slice verically)
      */
-    createSubMatrix(rowStart:number,colStart:number, rowEnd:number,colEnd:number):string[]{
+    createSubMatrix(rowStart:number,colStart:number, rowEnd:number,colEnd:number):string[][]{
         return this.radarImage.slice(rowStart, rowStart + rowEnd).
                                map((i: any) => i.slice(colStart, colStart + colEnd))
     }

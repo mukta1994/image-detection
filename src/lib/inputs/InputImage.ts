@@ -1,8 +1,8 @@
 export default class InputImage {
 
-    image : string[] 
+    image : string[][] 
    
-    constructor(img:string[]) {
+    constructor(img:string[][]) {
          this.image = img
     }
 

@@ -16,7 +16,7 @@ export default class SearchSpaceInvador {
      * @param radarImg - used to get size of radarImg
      * @param spaceInv - used to get size of spaceInv
      */
-    areValidImages(radarImg: string[], spaceInv: string[]) {
+    areValidImages(radarImg: string[][], spaceInv: string[][]) {
         if (radarImg.length <= spaceInv.length - 1 || radarImg[0].length <= spaceInv[0].length - 1) {
             throw new Error("Radar image should be grater than invador")
         }
@@ -68,7 +68,7 @@ export default class SearchSpaceInvador {
     * returns number of mismatches to be allowed and is calculated by using percentage of accuracy
     *  @param {string[]} spaceInv - mismatches to be ignored is calculated using spaceInv
     */
-    mismatchesTobeIgnored(spaceInv: string[]) {
+    mismatchesTobeIgnored(spaceInv: string[][]) {
         //comparisons - gets total number of comparisons to be made with subimage and invador 
         let comparisons = spaceInv[0].length * spaceInv.length
 
