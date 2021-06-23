@@ -1,12 +1,9 @@
-import InputImage from '../../src/lib/inputs/InputImage'
 import InvadorImage from '../../src/lib/inputs/InvadorImage'
 import ConvertToMatrix from '../../src/lib/ConvertToMatrix'
 
-const matrix1 = new ConvertToMatrix()
-
-const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
-const invador3 = matrix1.processImage('src/imagefiles/invador3.txt')
-const invador4 = matrix1.processImage('src/imagefiles/invador4.txt')
+const invador1 = ConvertToMatrix.processImage('src/imagefiles/invador1.txt')
+const invador3 = ConvertToMatrix.processImage('src/imagefiles/invador3.txt')
+const invador4 = ConvertToMatrix.processImage('src/imagefiles/invador4.txt')
 
 
 describe('test subimage(sub matrix) compared with invador', () => {

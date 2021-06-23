@@ -8,7 +8,7 @@ export default class ConvertToMatrix {
      * read text file to get data from file and that is converted to array.
      * @param {string} filePath - path to the text file, the text file to be converted to array
      */
-     processImage( filePath:string):string[][]{
+    static processImage( filePath:string):string[][]{
         let imageArray:string[][] = [];
 
         const file = readFileSync(filePath, 'utf-8');

@@ -1,11 +1,9 @@
 import InputImage from '../../src/lib/inputs/InputImage'
 import ConvertToMatrix from '../../src/lib/ConvertToMatrix'
 
-const matrix1 = new ConvertToMatrix()
-
-const exmpleRadarImage = matrix1.processImage('src/imagefiles/radarimage.txt')
-const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
-const invalidImage = matrix1.processImage('src/imagefiles/invalidimage.txt')
+const exmpleRadarImage = ConvertToMatrix.processImage('src/imagefiles/radarimage.txt')
+const invador1 = ConvertToMatrix.processImage('src/imagefiles/invador1.txt')
+const invalidImage = ConvertToMatrix.processImage('src/imagefiles/invalidimage.txt')
 
 describe('test images to get size and validation', () => {
 

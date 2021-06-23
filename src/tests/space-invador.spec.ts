@@ -1,15 +1,12 @@
 import SearchSpaceInvador from '../../src/lib/SearchSpaceInvador'
-import InputImage from '../../src/lib/inputs/InputImage'
 import RadarImage from '../../src/lib/inputs/RadarImage'
 import InvadorImage from '../../src/lib/inputs/InvadorImage'
 import ConvertToMatrix from '../../src/lib/ConvertToMatrix'
 
-const matrix1 = new ConvertToMatrix()
-
-const exmpleRadarImage = matrix1.processImage('src/imagefiles/radarimage.txt')
-const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
-const invador2 = matrix1.processImage('src/imagefiles/invador2.txt')
-const exmpleRadarImage2 = matrix1.processImage('src/imagefiles/test.txt')
+const exmpleRadarImage = ConvertToMatrix.processImage('src/imagefiles/radarimage.txt')
+const invador1 = ConvertToMatrix.processImage('src/imagefiles/invador1.txt')
+const invador2 = ConvertToMatrix.processImage('src/imagefiles/invador2.txt')
+const exmpleRadarImage2 = ConvertToMatrix.processImage('src/imagefiles/test.txt')
 
 
 const radarImg = new RadarImage(exmpleRadarImage)
@@ -74,8 +71,8 @@ describe('match invadors with different accuracy', () => {
 
 describe.skip('test with small radars', () => {
 
-  const smallradar = matrix1.processImage('src/imagefiles/smallradar.txt')
-  const smallinv = matrix1.processImage('src/imagefiles/smallinv.txt')
+  const smallradar = ConvertToMatrix.processImage('src/imagefiles/smallradar.txt')
+  const smallinv = ConvertToMatrix.processImage('src/imagefiles/smallinv.txt')
 
   const radarImgSmall = new RadarImage(smallradar)
   const invadorImgSmall = new InvadorImage(smallinv)
