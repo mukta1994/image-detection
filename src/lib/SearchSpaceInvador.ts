@@ -4,8 +4,6 @@ import InvadorImage from '../lib/inputs/InvadorImage'
 export default class SearchSpaceInvador {
 
     accuracy: number
-    eff: number = 0
-    brute: number = 0
 
     constructor(accuracyPerc: number) {
         this.accuracy = accuracyPerc
