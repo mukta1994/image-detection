@@ -3,15 +3,10 @@ import InputImage from './InputImage'
 
 export default class InvadorImage extends InputImage {
 
-    rows = this.getRows()
-    cols = this.getCols()
-    valid = this.validateImage()
-    cache: any = {
-        "o-": false,
-        "-o": false,
-        "--": true,
-        "oo": true
-    }
+    private cache: any ={ "o-": false,
+                          "-o": false,
+                          "--": true,
+                          "oo": true }
 
     constructor(image: string[][]) {
         super(image)
@@ -27,7 +22,7 @@ export default class InvadorImage extends InputImage {
     // |---->     <----|           - - - - -
     //  ---------------            ^       ^
 
-    // ---------------
+    //  ---------------
     // |               |                
     // |---->     <----|           - - - - -           
     // |               |             ^   ^
@@ -50,13 +45,11 @@ export default class InvadorImage extends InputImage {
      * @param ignoreMismatches - number of mismatches allowed. This is compared with count.
      * Pictoria representation is shown above.
      */
-
-
-
     compareWithSubImg(subimage: string[][], ignoreMismatches: number): boolean {
+        
         let count: number = 0
-        let midRow = Math.floor(subimage.length / 2)
-        let midCol = Math.floor(subimage[0].length / 2)
+        let midRow = Math.floor(this.rows / 2)
+        let midCol = Math.floor(this.cols / 2)
         let args: info = {
             'i': 0,
             'midCol': midCol,
@@ -66,29 +59,24 @@ export default class InvadorImage extends InputImage {
             'subimage': subimage
         }
 
-
         for (let i = 0; i < midRow; i++) {  //O(n/2)
-
             args.i = i
-
             count = this.compareElementsWithMemoisation(args, count)
-
             if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
         }
 
         //this compares middle row elements when radar array has odd row length 
         if (subimage.length % 2 != 0) {
-
             args.i = midRow
-
             count = this.compareElementsWithMemoisation(args, count)
-
             if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
         }
         return true
     }
+
+
 
     //For each loop, column is validated from both sides where it can reduce half of loops
     compareElements(args: info, count: number) {
@@ -169,7 +157,6 @@ export default class InvadorImage extends InputImage {
                     else count++
                 }
             }
-
         }
         return count
     }
@@ -186,9 +173,9 @@ export default class InvadorImage extends InputImage {
      * compare subimage(sub matrix) with invador returns true if it matches else returns false. for loop is used 
      * count - whenever element at 'i' and 'j' position in subimage and invadorImage is mismatched count is incremented by 1
      * @argument {number} ignoreMismatches - number of mismatches allowed. This is compared with count.
-     * @argument {string[]} subimage - submatrix of radar image which is to be compared with invador image
+     * @argument {string[][]} subimage - submatrix of radar image which is to be compared with invador image
      */
-    compareWithSubImg1(subimage: string[], ignoreMismatches: number): boolean {
+    compareWithSubImg1(subimage: string[][], ignoreMismatches: number): boolean {
         let count = 0
         for (let i = 0; i < subimage.length; i++) {
             for (let j = 0; j < subimage[0].length; j++) {

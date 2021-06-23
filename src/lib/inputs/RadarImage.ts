@@ -1,10 +1,6 @@
 import InputImage from './InputImage'
 
 export default class RadarImage extends InputImage {
-
-    rows = this.getRows()
-    cols = this.getCols()
-    valid = this.validateImage()
     
     constructor(image:string[][]){
         super(image)

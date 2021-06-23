@@ -26,10 +26,7 @@ describe('test images to get size and validation', () => {
   it('test when image is invalid', () => {  
     const radarImg = new InputImage(invalidImage)
     jest.spyOn(radarImg, 'validateImage')
-    const t = () => {
-      radarImg.validateImage()
-    };
-    expect(t).toThrow();
+    expect(radarImg.validateImage()).toBeFalsy();
     expect(radarImg.validateImage).toHaveBeenCalledTimes(1)
   });
 });

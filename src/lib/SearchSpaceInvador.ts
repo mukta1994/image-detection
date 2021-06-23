@@ -30,8 +30,8 @@ export default class SearchSpaceInvador {
      * @param invador -  detected(searched) in radar image depending on the percentage of accuracy
      */
     getNumOfInvadorsFound(radar: RadarImage, invador: InvadorImage) {
-        let radarImg = radar.validateImage() ? radar.image : [[]]
-        let spaceInv = invador.validateImage() ? invador.image : [[]]
+        let radarImg = radar.valid ? radar.image : [[]]
+        let spaceInv = invador.valid ? invador.image : [[]]
 
         if (this.areValidImages(radarImg, spaceInv)) {
             let count = 0
