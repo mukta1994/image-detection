@@ -3,10 +3,13 @@ import InputImage from './InputImage'
 
 export default class InvadorImage extends InputImage{
 
-    invadorImage = this.image
-    rows = this.getSize().rows
-    cols = this.getSize().cols
+    rows = this.getRows()
+    cols = this.getCols()
     valid = this.validateImage()
+    
+    constructor(image:string[][]){
+        super(image)
+    }
 
 
 
@@ -51,8 +54,8 @@ export default class InvadorImage extends InputImage{
             'i': 0,
             'midCol': midCol,
             'ignoreMismatches': Math.floor(ignoreMismatches),
-            'rows': this.rows - 1,
-            'cols': this.cols - 1,
+            'rows': this.getRows() - 1,
+            'cols': this.getCols() - 1,
             'subimage': subimage
         }
 
@@ -87,32 +90,32 @@ export default class InvadorImage extends InputImage{
         for (let j = 0; j < midCol; j++) { //O(n/2) 4 loops is reduced to 1 loop
 
             //compare element from top row and left column
-            if (subimage[i][j] != this.invadorImage[i][j]) {
+            if (subimage[i][j] != this.image[i][j]) {
                 if (this.isValidMatch(count, ignoreMismatches)) break;
                 else count++
             }
 
             //compare element from top row and right column
-            if (subimage[i][cols - j] != this.invadorImage[i][cols - j]) {
+            if (subimage[i][cols - j] != this.image[i][cols - j]) {
                 if (this.isValidMatch(count, ignoreMismatches)) break;
                 else count++
             }
 
             //compare element from bottom row and left column
-            if (subimage[rows - i][j] != this.invadorImage[rows - i][j]) {
+            if (subimage[rows - i][j] != this.image[rows - i][j]) {
                 if (this.isValidMatch(count, ignoreMismatches)) break;
                 else count++
             }
 
             //compare element of bottom row and right column
-            if (subimage[rows - i][cols - j] != this.invadorImage[rows - i][cols - j]) {
+            if (subimage[rows - i][cols - j] != this.image[rows - i][cols - j]) {
                 if (this.isValidMatch(count, ignoreMismatches)) break;
                 else count++
             }
 
             //this logic compares middle element of i'th row when invador array has odd column length 
             if (subimage[0].length % 2 != 0 && j == midCol - 1) {
-                if (subimage[i][j + 1] != this.invadorImage[i][j + 1]) {
+                if (subimage[i][j + 1] != this.image[i][j + 1]) {
                     if (this.isValidMatch(count, ignoreMismatches)) break;
                     else count++
                 }
@@ -137,7 +140,7 @@ export default class InvadorImage extends InputImage{
         let count = 0
         for (let i = 0; i < subimage.length; i++) {
             for (let j = 0; j < subimage[0].length; j++) {
-                if (subimage[i][j] != this.invadorImage[i][j]) {
+                if (subimage[i][j] != this.image[i][j]) {
                     count++
                 }
                 if (count > Math.floor(ignoreMismatches))

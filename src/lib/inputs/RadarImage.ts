@@ -2,10 +2,13 @@ import InputImage from './InputImage'
 
 export default class RadarImage extends InputImage {
 
-    radarImage = this.image
-    rows = this.getSize().rows
-    cols = this.getSize().cols
+    rows = this.getRows()
+    cols = this.getCols()
     valid = this.validateImage()
+    
+    constructor(image:string[][]){
+        super(image)
+    }
 
 
     /**
@@ -17,7 +20,7 @@ export default class RadarImage extends InputImage {
      */
     createSubMatrix(params: submatrix): string[][] {
         const { rowStart, colStart, rowEnd, colEnd } = params
-        return this.radarImage.slice(rowStart, rowStart + rowEnd).
+        return this.image.slice(rowStart, rowStart + rowEnd).
             map((i: any) => i.slice(colStart, colStart + colEnd))
     }
  

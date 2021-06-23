@@ -15,6 +15,22 @@ export default class InputImage {
         }
     }
 
+    getRows() {
+        if(!this.image.length) 
+            throw  Error()
+        else{
+            return this.image.length  
+        }
+    }
+
+    getCols() {
+        if(!this.image[0].length) 
+            throw  Error()
+        else{
+            return this.image[0].length  
+        }
+    }
+
     //validate image. The image should contain only 'o' and '-'. If not return false
     validateImage() {
         let size = this.getSize()  
