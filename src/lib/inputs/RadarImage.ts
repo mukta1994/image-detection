@@ -1,18 +1,12 @@
 import InputImage from './InputImage'
 
-export default class RadarImage {
+export default class RadarImage extends InputImage {
 
-    radarImage: string[][]
-    rows: number
-    cols: number
-    valid: boolean
+    radarImage = this.image
+    rows = this.getSize().rows
+    cols = this.getSize().cols
+    valid = this.validateImage()
 
-    constructor(radar: InputImage) {
-        this.radarImage = radar.image;
-        this.rows = radar.getSize().rows
-        this.cols = radar.getSize().cols
-        this.valid = radar.validateImage()
-    }
 
     /**
      * returns submatrix of radar image. It slices rows and columns
@@ -26,5 +20,6 @@ export default class RadarImage {
         return this.radarImage.slice(rowStart, rowStart + rowEnd).
             map((i: any) => i.slice(colStart, colStart + colEnd))
     }
+ 
 
 }

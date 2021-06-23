@@ -1,19 +1,13 @@
 import InputImage from './InputImage'
 
 
-export default class InvadorImage {
+export default class InvadorImage extends InputImage{
 
-    invadorImage: string[][]
-    rows: number
-    cols: number
-    valid: boolean
+    invadorImage = this.image
+    rows = this.getSize().rows
+    cols = this.getSize().cols
+    valid = this.validateImage()
 
-    constructor(invador: InputImage) {
-        this.invadorImage = invador.image;
-        this.rows = invador.getSize().rows
-        this.cols = invador.getSize().cols
-        this.valid = invador.validateImage()
-    }
 
 
     //Representation how elements are compared.Consider we have 4*4 2 matrix. It is traversed as shown below while comparison

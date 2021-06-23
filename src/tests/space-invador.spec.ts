@@ -9,17 +9,16 @@ const matrix1 = new ConvertToMatrix()
 const exmpleRadarImage = matrix1.processImage('src/imagefiles/radarimage.txt')
 const invador1 = matrix1.processImage('src/imagefiles/invador1.txt')
 const invador2 = matrix1.processImage('src/imagefiles/invador2.txt')
-
 const exmpleRadarImage2 = matrix1.processImage('src/imagefiles/test.txt')
 
-const radarImg = new RadarImage(new InputImage(exmpleRadarImage))
-const invadorImg = new InvadorImage(new InputImage(invador1))
 
-const radarImg2 = new RadarImage(new InputImage(exmpleRadarImage2))
-const invadorImg2 = new InvadorImage(new InputImage(invador2))
+const radarImg = new RadarImage(exmpleRadarImage)
+const invadorImg = new InvadorImage(invador1)
+const radarImg2 = new RadarImage(exmpleRadarImage2)
+const invadorImg2 = new InvadorImage(invador2)
 
 describe('validate inputs', () => {
-  it("when image inputs are invalid", () => {
+  it("when image inputs are invalid(should throw error)", () => {
     const searchInvador = new SearchSpaceInvador(100)
     jest.spyOn(searchInvador, 'areValidImages')
     const t = () => {
@@ -29,7 +28,7 @@ describe('validate inputs', () => {
     expect(searchInvador.areValidImages).toHaveBeenCalledTimes(1)
   });
 
-  it('when image inputs are valid', () => {
+  it('when image inputs are valid(should be true)', () => {
     const searchInvador = new SearchSpaceInvador(100)
     jest.spyOn(searchInvador, 'areValidImages')
     expect(searchInvador.areValidImages(exmpleRadarImage, invador1)).toBe(true)
@@ -39,7 +38,7 @@ describe('validate inputs', () => {
 
 
 describe('match invadors with different accuracy', () => {
-  it('number of invador matches with 80% accuracy', () => {
+  it('number of invador matches with 80% accuracy(should be 3)', () => {
     const searchInvador = new SearchSpaceInvador(80)
     jest.spyOn(searchInvador, 'getNumOfInvadorsFound')
     expect(searchInvador.getNumOfInvadorsFound(radarImg, invadorImg)).toEqual(3)
@@ -47,7 +46,7 @@ describe('match invadors with different accuracy', () => {
   });
 
 
-  it('number of invador matches with 90% accuracy', () => {
+  it('number of invador matches with 90% accuracy(should be 1)', () => {
     const searchInvador = new SearchSpaceInvador(90)
     jest.spyOn(searchInvador, 'getNumOfInvadorsFound')
     expect(searchInvador.getNumOfInvadorsFound(radarImg, invadorImg)).toEqual(1)
@@ -78,8 +77,8 @@ describe.skip('test with small radars', () => {
   const smallradar = matrix1.processImage('src/imagefiles/smallradar.txt')
   const smallinv = matrix1.processImage('src/imagefiles/smallinv.txt')
 
-  const radarImgSmall = new RadarImage(new InputImage(smallradar))
-  const invadorImgSmall = new InvadorImage(new InputImage(smallinv))
+  const radarImgSmall = new RadarImage(smallradar)
+  const invadorImgSmall = new InvadorImage(smallinv)
 
   // testing with small radars
   it('number of invador matches with 100% accuracy', () => {
