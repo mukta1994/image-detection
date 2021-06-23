@@ -1,5 +1,9 @@
 {
+  "name": "space-invadors",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
+    "start": "tsc && node dist/lib/index.js",
     "test": "jest"
   },
   "devDependencies": {
@@ -8,5 +12,17 @@
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.4"
-  }
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "#Once download is complete, please go to \"image-detection-main\" folder in command prompt and then type+run the below commands(one by one):",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukta1994/image-detection.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mukta1994/image-detection/issues"
+  },
+  "homepage": "https://github.com/mukta1994/image-detection#readme"
 }

@@ -1,17 +1,21 @@
 import InputImage from './InputImage'
 
 
-export default class InvadorImage extends InputImage{
+export default class InvadorImage extends InputImage {
 
     rows = this.getRows()
     cols = this.getCols()
     valid = this.validateImage()
-    
-    constructor(image:string[][]){
-        super(image)
+    cache: any = {
+        "o-": false,
+        "-o": false,
+        "--": true,
+        "oo": true
     }
 
-
+    constructor(image: string[][]) {
+        super(image)
+    }
 
     //Representation how elements are compared.Consider we have 4*4 2 matrix. It is traversed as shown below while comparison
     // row wise                   column wise
@@ -46,11 +50,14 @@ export default class InvadorImage extends InputImage{
      * @param ignoreMismatches - number of mismatches allowed. This is compared with count.
      * Pictoria representation is shown above.
      */
+
+
+
     compareWithSubImg(subimage: string[][], ignoreMismatches: number): boolean {
-        let count: any = 0
+        let count: number = 0
         let midRow = Math.floor(subimage.length / 2)
         let midCol = Math.floor(subimage[0].length / 2)
-        let args:info = {
+        let args: info = {
             'i': 0,
             'midCol': midCol,
             'ignoreMismatches': Math.floor(ignoreMismatches),
@@ -59,11 +66,12 @@ export default class InvadorImage extends InputImage{
             'subimage': subimage
         }
 
+
         for (let i = 0; i < midRow; i++) {  //O(n/2)
-           
+
             args.i = i
 
-            count = this.compareElements(args, count)
+            count = this.compareElementsWithMemoisation(args, count)
 
             if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
@@ -74,7 +82,7 @@ export default class InvadorImage extends InputImage{
 
             args.i = midRow
 
-            count = this.compareElements(args, count)
+            count = this.compareElementsWithMemoisation(args, count)
 
             if (this.isValidMatch(count, args.ignoreMismatches))
                 return false
@@ -84,8 +92,8 @@ export default class InvadorImage extends InputImage{
 
     //For each loop, column is validated from both sides where it can reduce half of loops
     compareElements(args: info, count: number) {
-        
-        const { i, subimage, midCol, ignoreMismatches, rows, cols } = args
+
+        const { i, subimage, midCol, ignoreMismatches, rows, cols } = args;
 
         for (let j = 0; j < midCol; j++) { //O(n/2) 4 loops is reduced to 1 loop
 
@@ -107,8 +115,8 @@ export default class InvadorImage extends InputImage{
                 else count++
             }
 
-            //compare element of bottom row and right column
-            if (subimage[rows - i][cols - j] != this.image[rows - i][cols - j]) {
+             //compare element of bottom row and right column
+             if (subimage[rows - i][cols - j] != this.image[rows - i][cols - j]) {
                 if (this.isValidMatch(count, ignoreMismatches)) break;
                 else count++
             }
@@ -123,6 +131,50 @@ export default class InvadorImage extends InputImage{
         }
         return count
     }
+
+    // tried to use memoisation while comparing elements as there are only 4 possibilities
+    compareElementsWithMemoisation(args: info, count: number) {
+
+        const { i, subimage, midCol, ignoreMismatches, rows, cols } = args;
+
+        for (let j = 0; j < midCol; j++) { //O(n/2) 4 loops is reduced to 1 loop
+
+            //compare element from top row and left column
+            if (!this.cache[subimage[i][j] + this.image[i][j]]) {
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
+            }
+
+            //compare element from top row and right column
+            if (!this.cache[subimage[i][cols - j] + this.image[i][cols - j]]) {
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
+            }
+
+            //compare element from bottom row and left column
+            if (!this.cache[subimage[rows - i][j] + this.image[rows - i][j]]) {
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
+            }
+
+            //compare element of bottom row and right column
+            if (!this.cache[subimage[rows - i][cols - j] + this.image[rows - i][cols - j]]) {
+                if (this.isValidMatch(count, ignoreMismatches)) break;
+                else count++
+            }
+
+            if (subimage[0].length % 2 != 0 && j == midCol - 1) {
+                if (!this.cache[subimage[i][j + 1] + this.image[i][j + 1]]) {
+                    if (this.isValidMatch(count, ignoreMismatches)) break;
+                    else count++
+                }
+            }
+
+        }
+        return count
+    }
+
+
 
     isValidMatch(count: number, mismatches: number) {
         return count > mismatches

@@ -10,7 +10,6 @@ export default class RadarImage extends InputImage {
         super(image)
     }
 
-
     /**
      * returns submatrix of radar image. It slices rows and columns
      * @param rowStart - index of row of radar image(the start position of slice horizontally)
